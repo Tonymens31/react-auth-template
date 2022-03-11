@@ -12,7 +12,9 @@ const Login = () => {
   const validateLogin = () => {
     let isValid = true;
 
-    let validator = Form.validator({
+      let validator = Form.validator({
+
+
       username: {
         value: username,
         isRequired: true,
