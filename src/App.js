@@ -7,13 +7,13 @@ const Auth = () => {
   return (
     <Router>
       <Switch>
-        <Route path='/login' component={Login} />
-        <Route path='/register' component={Register} />
-        <Route path='/forgot-password' component={Forgot} />
-        <Route path='/' component={Login} />
+        <Route path="/login" component={Login} />
+        <Route path="/register" component={Register} />
+        <Route path="/forgot-password" component={Forgot} />
+        <Route path="/" component={Login} />
       </Switch>
     </Router>
   );
-}
+};
 
 export default Auth;
