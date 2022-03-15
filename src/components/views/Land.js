@@ -23,7 +23,7 @@ const Land = () => {
           </div>
           <div className="auth-option text-white text-center pt-2">
             Click here to{" "}
-            <Link className="text-link" to="/register">
+            <Link className="text-link" to="/ClientRegistration">
               Client Registration
             </Link>
           </div>
