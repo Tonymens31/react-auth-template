@@ -27,6 +27,8 @@ import {
 
 const ClientRegistration = () => {
   const [show, setShow] = useState(false);
+  const handleShow = () => setShow(true);
+  const handleClose = () => setShow(false);
 
   const editOptions = {
     allowEditing: true,
@@ -35,8 +37,20 @@ const ClientRegistration = () => {
     allowEditOnDblClick: true,
   };
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const commandOptions = [
+    {
+      type: "Edit",
+      buttonOption: { iconCss: " e-icons e-edit", cssClass: "e-flat" },
+    },
+    {
+      type: "Delete",
+      buttonOption: { iconCss: "e-icons e-delete", cssClass: "e-flat" },
+    },
+    {
+      type: "Save",
+      buttonOption: { iconCss: "e-icons e-update", cssClass: "e-flat" },
+    },
+  ];
 
   return (
     <Container style={{}}>
@@ -46,8 +60,8 @@ const ClientRegistration = () => {
         </Col>
         <Col md="8" className="text-right">
           <Button
-            color="primary"
-            onClick={() => setShow(true)}
+            variant="primary"
+            onClick={handleShow}
             style={{ float: "right" }}
           >
             Add
@@ -85,24 +99,30 @@ const ClientRegistration = () => {
                 width="100"
               />
               <ColumnDirective
-                field={"actions"}
-                headerText="Actions"
-                width="100"
+                commands={commandOptions}
+                headerText={"Action"}
+                width="80"
+                textAlign="Center"
               />
-              {/* <ColumnDirective commands={commandOptions} headerText={"Action"} width='100' textAlign="Center" /> */}
             </ColumnsDirective>
             <Inject services={[Page, Sort, Filter, Group, Edit]} />
           </GridComponent>
         </Col>
       </Row>
 
-      <Modal isOpen={show} size="lg">
+      <Modal
+        isOpen={show}
+        onHide={handleClose}
+        size="lg"
+        backdrop="static"
+        keyboard={false}
+      >
         <ModalHeader>Add Client</ModalHeader>
         <ModalBody>
           <Row>
             <Col md={6}>
               <FormGroup>
-                <Label for="appID">Email</Label>
+                <Label for="appID">App ID</Label>
                 <Input
                   id="appID"
                   name="App ID"
@@ -113,7 +133,7 @@ const ClientRegistration = () => {
             </Col>
             <Col md={6}>
               <FormGroup>
-                <Label for="exampleEmail">App Name</Label>
+                <Label for="appName">App Name</Label>
                 <Input
                   id="appName"
                   name="App Name"
@@ -125,10 +145,10 @@ const ClientRegistration = () => {
           </Row>
         </ModalBody>
         <ModalFooter>
-          <Button color="primary" onClick={function noRefCheck() {}}>
+          <Button color="primary" onClick={handleClose}>
             Save
           </Button>{" "}
-          <Button onClick={() => setShow(false)} color="danger">
+          <Button onClick={handleClose} color="danger">
             Cancel
           </Button>
         </ModalFooter>
