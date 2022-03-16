@@ -24,9 +24,14 @@ import {
   Edit,
   //CommandColumn
 } from "@syncfusion/ej2-react-grids";
+import { useDispatch, useSelector } from "react-redux";
 
 const ClientRegistration = () => {
+  const data = useSelector((state) => state.data);
+  const dispatch = useDispatch();
+
   const [show, setShow] = useState(false);
+  const [submitData, setSubmitdata] = useState({});
   const handleShow = () => setShow(true);
   const handleClose = () => setShow(false);
 
@@ -51,6 +56,16 @@ const ClientRegistration = () => {
       buttonOption: { iconCss: "e-icons e-update", cssClass: "e-flat" },
     },
   ];
+
+  const handleChange = (evnt) => {
+    setSubmitdata({ ...data, [evnt?.target?.name]: evnt?.target?.value });
+    dispatch({
+      type: "set",
+      data: { ...data, [evnt?.target?.name]: evnt?.target?.value },
+    });
+  };
+
+  const handleSubmitdata = () => {};
 
   return (
     <Container style={{}}>
@@ -112,7 +127,7 @@ const ClientRegistration = () => {
 
       <Modal
         isOpen={show}
-        onHide={handleClose}
+        //onHide={handleClose}
         size="lg"
         backdrop="static"
         keyboard={false}
@@ -125,9 +140,10 @@ const ClientRegistration = () => {
                 <Label for="appID">App ID</Label>
                 <Input
                   id="appID"
-                  name="App ID"
-                  //placeholder="with a placeholder"
+                  name="appID"
+                  value={data?.appID || ""}
                   type="text"
+                  onChange={handleChange}
                 />
               </FormGroup>
             </Col>
@@ -136,16 +152,17 @@ const ClientRegistration = () => {
                 <Label for="appName">App Name</Label>
                 <Input
                   id="appName"
-                  name="App Name"
-                  //placeholder="with a placeholder"
-                  type="appName"
+                  name="appName"
+                  value={data.appName || ""}
+                  type="text"
+                  onChange={handleChange}
                 />
               </FormGroup>
             </Col>
           </Row>
         </ModalBody>
         <ModalFooter>
-          <Button color="primary" onClick={handleClose}>
+          <Button color="primary" onClick={handleSubmitdata}>
             Save
           </Button>{" "}
           <Button onClick={handleClose} color="danger">
