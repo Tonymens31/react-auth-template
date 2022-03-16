@@ -6,8 +6,6 @@ export const config = {
   persol_logo_white: "logo/placeholder.png",
   defaultUserImage: "avatars/default_user.png",
   default_logo: "logo/placeholder.png",
-  langLogo: { en: "logo/english.png", fr: "logo/french.png" },
-  langs: { "en-US": "en", "fr-FR": "fr", fr: "fr", en: "en" },
   key: { lan: "language", sideBarShow: "sidebarShow" },
 };
 
