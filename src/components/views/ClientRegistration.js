@@ -25,6 +25,45 @@ import {
   //CommandColumn
 } from "@syncfusion/ej2-react-grids";
 import { useDispatch, useSelector } from "react-redux";
+import { ToastContainer, toast } from 'react-toastify';
+
+import 'react-toastify/dist/ReactToastify.css';
+
+const toaster = (toastId, message, type, time) => {
+  switch (type) {
+    case "info":
+      toast.info(message, {
+        position: "top-right",
+        autoClose: time,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        isLoading: false,
+      });
+      break;
+    case "error":
+    case "success":
+    case "warning":
+      toast.update(toastId, {
+        render: message,
+        type,
+        position: "top-right",
+        autoClose: 5000,
+        //delay: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        isLoading: false,
+      });
+      break;
+    default:
+      break;
+  }
+};
 
 const ClientRegistration = () => {
   const data = useSelector((state) => state.data);
@@ -65,7 +104,33 @@ const ClientRegistration = () => {
     });
   };
 
-  const handleSubmitdata = () => {};
+  const handleSubmitdata = () => {
+    toast.info("tryyy", {
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      isLoading: false,
+    });
+    //toaster("", "Enter App ID", "info", 3000);
+
+    return;
+
+    if (!submitData?.appID || submitData?.appID === "") {
+      toaster("", "Enter App ID", "info", 3000);
+      return;
+    }
+    if (!submitData?.appName || submitData?.appName === "") {
+      toaster("", "Enter App Name", "info", 3000);
+      return;
+    }
+
+    let currentData = { ...submitData };
+    console.log(currentData);
+  };
 
   return (
     <Container style={{}}>
